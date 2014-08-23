@@ -21,9 +21,31 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="starter">
-    <ion-tabs class="tabs-striped tabs-background-positive tabs-stable">
-      <ion-tab title="Home" icon-on="ion-home" icon-off="ion-home">
+  <body ng-app="tanngo">
+    <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+    <script id="tabs.html" type="text/ng-template">
+      <ion-tabs class="tabs-striped tabs-background-positive tabs-stable">
+        <ion-tab title="Home" icon-on="ion-home" icon-off="ion-home" href="#/tab/home">
+          <ion-nav-view name="home-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Settings" icon-on="ion-gear-a" icon-off="ion-gear-a" href="#/tab/settings">
+          <ion-nav-view name="settings-tab"></ion-nav-view>
+        </ion-tab>
+        
+        <ion-tab title="About" icon-on="ion-ios7-information" icon-off="ion-ios7-information" href="#/tab/about">
+          <ion-nav-view name="about-tab"></ion-nav-view>
+        </ion-tab>
+      </ion-tabs>
+    </script>
+
+    <script id="home.html" type="text/ng-template">
+      <ion-view title="Home">
         <ion-pane>
           <ion-header-bar class="bar bar-header bar-positive">
             <h1 class="title">Home</h1>
@@ -33,7 +55,7 @@
               <ion-item class="item item-avatar">
                 <img src="img/iikatsu.png" alt="">
                 <h2>Tanngo</h2>
-                <p>Tanngo can help you learn Japanese Kana.</p>
+                <p>learn Japanese Kana.</p>
               </ion-item>
             </ion-list>
 
@@ -41,31 +63,30 @@
               Random Test
             </button>
 
-            <button class="button button-light button-block icon-left ion-mic-c">
+            <a class="button button-light button-block icon-left ion-mic-c" href="">
               Accent Test
-            </button>
+            </a>
             
             <button class="button-block button-positive button icon-left ion-wand">
               Colorful Recite
             </button>
             
-            <button class="button button-light button-block icon-left ion-filing">
+            <a class="button button-light button-block icon-left ion-filing" href='#/tab/manage'>
               Word Management
-            </button>
+            </a>
           </ion-content>
-        </ion-pane>
-      </ion-tab>
+         </ion-pane>
+      </ion-view>
+   </script>
 
-      <ion-tab title="Settings" icon-on="ion-gear-a" icon-off="ion-gear-a">
-        <ion-pane>
-          <ion-header-bar class="bar bar-header bar-positive">
-            <h1 class="title">Setting</h1>
-          </ion-header-bar>
-        </ion-pane>
-      </ion-tab>
-      
-      <ion-tab title="About" icon-on="ion-ios7-information" icon-off="ion-ios7-information">
-        <ion-pane>
+   <script id="settings.html" type="text/ng-template">
+     <ion-view title="Settings">
+     </ion-view>
+   </script>
+
+   <script id="about.html" type="text/ng-template">
+   <ion-view title="About">
+      <ion-pane>
           <ion-header-bar class="bar bar-header bar-positive">
             <h1 class="title">About</h1>
           </ion-header-bar>
@@ -85,15 +106,15 @@
                   <p>Mmmm...Thanks for you support, and have a nice day :)</p>
                 </ion-item>
                 <ion-item class="item item-footer tabs tab-secondary tabs-icon-left tabs-background-stable">
-                  <a href="#" class="tab-item">
+                  <a class="tab-item">
                     <i class="icon ion-thumbsup"></i>
                     Like
                   </a>
-                  <a href="#" class="tab-item">
+                  <a class="tab-item">
                     <i class="icon ion-paper-airplane"></i>
                     Contact
                   </a>
-                  <a href="#" class="tab-item">
+                  <a class="tab-item">
                     <i class="icon ion-share"></i>
                     Share
                   </a>
@@ -101,9 +122,24 @@
             </ion-list>
           </ion-content>
         </ion-pane>
-      </ion-tab>
+   </ion-view>
+   </script>
 
+   <script id="manage.html" type="text/ng-template">
+    <ion-view title="Word Management">
+      <ion-content class="padding">
+        <ion-list>
+          <ion-item class="item-input">
 
-    </ion-tabs>
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Kana Filter">
+
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-view>
+
+   </script>
+
   </body>
 </html>

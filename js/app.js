@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('tanngo', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -16,6 +16,52 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
+});
+
+angular.module('tanngo', ['ionic'])
+
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('tabs', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "tabs.html"
+    })
+    .state('tabs.home', {
+      url: "/home",
+      views : {
+        'home-tab' : {
+          templateUrl: "home.html"
+        }
+      }
+    })
+    .state('tabs.settings', {
+      url: "/settings",
+      views: {
+        'settings-tab' : {
+          templateUrl: "settings.html"
+        }
+      }
+    })
+    .state('tabs.about', {
+      url: "/about",
+      views : {
+        'about-tab' : {
+          templateUrl: "about.html"
+        }
+      }
+    })
+    .state('tabs.manage', {
+      url: "/manage",
+      views: {
+        'home-tab' : {
+          templateUrl: "manage.html"
+        }
+      }
+    })
+    ;
+
+    $urlRouterProvider.otherwise('/tab/home');
+});
 
 

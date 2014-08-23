@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter">
+    <ion-tabs class="tabs-striped tabs-background-positive tabs-stable">
+      <ion-tab title="Home" icon-on="ion-home" icon-off="ion-home">
+        <ion-pane>
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">Home</h1>
+          </ion-header-bar>
+          <ion-content padding='true'>
+            <ion-list class="list list-inset">
+              <ion-item class="item item-avatar">
+                <img src="img/iikatsu.png" alt="">
+                <h2>Tanngo</h2>
+                <p>Tanngo can help you learn Japanese Kana.</p>
+              </ion-item>
+            </ion-list>
+
+            <button class="button button-light button-block icon-left ion-trophy">
+              Random Test
+            </button>
+
+            <button class="button button-light button-block icon-left ion-mic-c">
+              Accent Test
+            </button>
+            
+            <button class="button-block button-positive button icon-left ion-wand">
+              Colorful Recite
+            </button>
+            
+            <button class="button button-light button-block icon-left ion-filing">
+              Word Management
+            </button>
+          </ion-content>
+        </ion-pane>
+      </ion-tab>
+
+      <ion-tab title="Settings" icon-on="ion-gear-a" icon-off="ion-gear-a">
+        <ion-pane>
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">Setting</h1>
+          </ion-header-bar>
+        </ion-pane>
+      </ion-tab>
+      
+      <ion-tab title="About" icon-on="ion-ios7-information" icon-off="ion-ios7-information">
+        <ion-pane>
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">About</h1>
+          </ion-header-bar>
+          <ion-content padding="true">
+            <ion-list class="list card" padding='true'>
+                <ion-item class="item item-avatar">
+                  <img src="img/kinki.png" alt="">
+                  <h2>@Grzhan</h2>
+                  <p>Developer &amp; SHU Student</p>
+                </ion-item>
+                <ion-item class="item item-body">
+                  <img src="img/open_source_8.jpg" alt="" class="full-image">
+                  <p>Hi, I&acute;m grzhan, thanks for using <strong>Tanngo</strong></p>
+                  <p><strong>Tanngo</strong> is a simple mobile app which can help you learn Japanese kana(words),based on <strong>ionic</strong> <i class="icon ion-ionic"></i>, a HTML5 mobile UI framework. </p>
+                  <p>The tanngo&acute;s most amazing feature is <strong>kana recognization</strong>(in Accent Test), tanngo can record your pronounciations, then analyze and score them. What help us implements this feature is <strong>Julius</strong>, a text by alarge vocabulary continuous speech recognizer(LVCSR), we deploy it in a external web server. The mechanism is Julius receive audio datas from tanngo and send back results to mobile-end.</p>
+                  <p>Tanngo is still in Beta, so if you find any bugs or you have any suggestions, please click button below to contact us.</p>
+                  <p>Mmmm...Thanks for you support, and have a nice day :)</p>
+                </ion-item>
+                <ion-item class="item item-footer tabs tab-secondary tabs-icon-left tabs-background-stable">
+                  <a href="#" class="tab-item">
+                    <i class="icon ion-thumbsup"></i>
+                    Like
+                  </a>
+                  <a href="#" class="tab-item">
+                    <i class="icon ion-paper-airplane"></i>
+                    Contact
+                  </a>
+                  <a href="#" class="tab-item">
+                    <i class="icon ion-share"></i>
+                    Share
+                  </a>
+                </ion-item> 
+            </ion-list>
+          </ion-content>
+        </ion-pane>
+      </ion-tab>
+
+
+    </ion-tabs>
+  </body>
+</html>

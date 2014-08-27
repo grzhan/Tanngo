@@ -1,0 +1,26 @@
+[{
+	"wid"  : 1,
+	"kanji" : "お母さん",
+	"rome" : "oka:saN",
+	"trans" : "妈妈"
+},{
+	"wid" : 2,
+	"kanji" : "姫",
+	"rome" : "hime",
+	"trans" : "公主"
+},{
+	"wid" : 3,
+	"kanji" : "私",
+	"rome" : "watashi",
+	"trans" : "我"
+},{
+	"wid" : 4,
+	"kanji" : "お父さん",
+	"trans" : "父亲",
+	"rome" : "oto:saN"
+},{
+	"wid" : 5,
+	"kanji" : "貴方",
+	"trans" : "你",
+	"rome" : "anata"
+}]

@@ -1,1 +1,9 @@
 /* Empty. Add your own CSS if you like */
+.show {
+	display: block;
+	text-align: center;
+}
+
+.hide {
+	display: none;
+}

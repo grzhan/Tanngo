@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -59,17 +60,17 @@
               </ion-item>
             </ion-list>
 
-            <button class="button button-light button-block icon-left ion-trophy">
+            <a class="button button-light button-block icon-left ion-trophy" href="#/tab/test">
               Random Test
-            </button>
+            </a>
 
             <a class="button button-light button-block icon-left ion-mic-c" href="#/tab/accent">
               Accent Test
             </a>
             
-            <button class="button-block button-positive button icon-left ion-wand">
-              Colorful Recite
-            </button>
+            <a class="button-block button-positive button icon-left ion-wand" href="#/tab/four">
+              Learn four words
+            </a>
             
             <a class="button button-light button-block icon-left ion-filing" href='#/tab/manage'>
               Word Refer
@@ -81,7 +82,16 @@
 
    <script id="settings.html" type="text/ng-template">
      <ion-view title="Settings">
-
+     <ion-pane>
+       <ion-content padding="true">
+        <ion-list class="list">
+          <ion-item class="item item-input item-stacked-label">
+            <span class="input-label" >Remote Server Url</span>
+            <input type="text" ng-value="$root.serverURL" ng-model="$root.serverURL">
+          </ion-item>
+        </ion-list>
+       </ion-content>
+     </ion-pane>
      </ion-view>
    </script>
 
@@ -126,17 +136,44 @@
    </ion-view>
    </script>
   
+  <script id="test.html" type="text/ng-template">
+    <ion-view title="Random Test">
+      <ion-content class="padding">
+        <ion-list>
+          <ion-item>
+            <h2> {{words[windex].trans}} &nbsp;&nbsp; <span class="item-note">{{windex+1}} / {{words.length}} </span>
+            </h2>
+          </ion-item>
+          <ion-item>
+            <h3> 所在章节: {{words[windex].chapter}} </h3>
+          </ion-item>
+          <ion-item class="item-input">
+            <input type="text" placeholder="Please input kana to test" ng-model="ans">
+          </ion-item>
+          <ion-item>
+            <button class="button button-positive button-block" ng-click="check(ans)">Submit</button>
+          </ion-item>
+          <ion-item class="item item-button-both">
+            <button class="button icon-left ion-chevron-left button-clear button-dark" ng-click="windexMinus()">Pre</button>
+            <button class="button icon-right ion-chevron-right button-clear button-dark" ng-click="windexAdd()">Next</button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-view>
+  </script>
+
   <!-- Accent Test Panel -->
   <script id="accent.html" type="text/ng-template">
     <ion-view title="Accent Test">
       <ion-content class="padding">
         <ion-list>
           <ion-item>
-            <h2 ng-bind="words[windex].kanji"></h2>
+            <h2> {{words[windex].kanji}} &nbsp;&nbsp; <span class="item-note">{{windex+1}} / {{words.length}} </span>
+            </h2>
           </ion-item>
           <ion-item>
             <button class="button button-block icon-left" 
-            ng-class="{0: 'button-calm', 1: 'button-calm', 2:'button-positive'}[recordState]" ng-click="record()">   
+            ng-class="{0: 'button-calm', 1: 'button-calm', 2:'button-positive', 3: 'button-assertive'}[recordState]" ng-click="record()">   
                 <i class="icon" ng-class="{0: 'ion-mic-a', 1: 'ion-loading-c', 2:'ion-loading-c'}[recordState]" ng-hide="recordState == 0"></i> 
                 {{ buttonMsg }}
             </button>
@@ -150,6 +187,31 @@
       </ion-content>
     </ion-view>
   </script>
+  
+  <!-- Accent Test Modal -->
+  <script id="accent_modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar-header bar-positive">
+        <h1 class="title">Test Result</h1>
+        <button class="button button-icon ion-close-round" ng-click="closeModal()"></button>
+      </ion-header-bar>     
+      <ion-content class="padding">
+        <ion-list class="card">
+          <ion-item class="item item-text-wrap item-button-right">
+              <h2>{{words[windex].kanji}} &nbsp; &nbsp; <span class="item-note">{{words[windex].rome}}</span></h2> 
+              <button class="button button-light" ng-click="audioPlay(words[windex])"><i class="icon ion-volume-medium"></i></button>
+          </ion-item>
+          <ion-item class="item item-text-wrap">
+              <p>Test Result : <span ng-class="{0:'assertive',1: 'balanced'}[response.wow]">{{ {0: 'Unmatched',1:'Matched'}[response.wow] }}</span></p>
+          </ion-item>
+          <ion-item>Detected rome word : {{ response.rome }}</ion-item>
+          <ion-item>Confidence scores : {{ response.score }}</ion-item>
+        </ion-list>
+      </ion-content>      
+
+    </ion-modal-view>
+  </script>
+
    <script id="manage.html" type="text/ng-template">
     <ion-view title="Word Refer">
       <ion-content class="padding">
@@ -200,5 +262,140 @@
     </ion-modal-view>
    </script>
 
+   <script id="four.html" type="text/ng-template">
+     <ion-view title="Learn four words">
+        <ion-content>
+        <ion-slide-box show-pager="true">
+          <ion-slide padding="true">
+            <ion-list class="list-inset list">
+              <ion-item class="item-button-right">
+              <h2>{{randomWords[0].kanji}}</h2>
+              <button class="button button-light" ng-click="audioPlay(randomWords[0])"><i class="icon ion-volume-medium"></i></button>
+              </ion-item>
+              <ion-item>
+              <p>Kana : {{randomWords[0].kana}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>翻译: &nbsp;&nbsp;{{randomWords[0].trans}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>词类: &nbsp;&nbsp;{{randomWords[0].wtype}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>重音: &nbsp;&nbsp;{{randomWords[0].accent}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>所属教材章节: &nbsp;&nbsp;{{randomWords[0].chapter}}</p>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+          <ion-slide padding="true">
+            <ion-list class="list-inset">
+              <ion-item class="item-button-right">
+              <h2>{{randomWords[1].kanji}}</h2>
+              <button class="button button-light" ng-click="audioPlay(randomWords[1])"><i class="icon ion-volume-medium"></i></button>
+              </ion-item>
+              <ion-item>
+              <p>Kana : {{randomWords[1].kana}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>翻译: &nbsp;&nbsp;{{randomWords[1].trans}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>词类: &nbsp;&nbsp;{{randomWords[1].wtype}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>重音: &nbsp;&nbsp;{{randomWords[1].accent}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>所属教材章节: &nbsp;&nbsp;{{randomWords[1].chapter}}</p>
+              </ion-item>
+
+            </ion-list>
+          </ion-slide>
+          <ion-slide padding="true">
+            <ion-list class="list-inset">
+              <ion-item class="item-button-right">
+              <h2>{{randomWords[2].kanji}}</h2>
+              <button class="button button-light" ng-click="audioPlay(randomWords[2])"><i class="icon ion-volume-medium"></i></button>
+              </ion-item>
+              <ion-item>
+              <p>Kana : {{randomWords[2].kana}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>翻译: &nbsp;&nbsp;{{randomWords[2].trans}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>词类: &nbsp;&nbsp;{{randomWords[2].wtype}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>重音: &nbsp;&nbsp;{{randomWords[2].accent}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>所属教材章节: &nbsp;&nbsp;{{randomWords[2].chapter}}</p>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+
+          <ion-slide padding="true">
+            <ion-list class="list-inset">
+              <ion-item class="item-button-right">
+              <h2>{{randomWords[3].kanji}}</h2>
+              <button class="button button-light" ng-click="audioPlay(randomWords[3])"><i class="icon ion-volume-medium"></i></button>
+              </ion-item>
+              <ion-item>
+              <p>Kana : {{randomWords[3].kana}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>翻译: &nbsp;&nbsp;{{randomWords[3].trans}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>词类: &nbsp;&nbsp;{{randomWords[3].wtype}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>重音: &nbsp;&nbsp;{{randomWords[3].accent}}</p>
+              </ion-item>
+              <ion-item class="item item-text-wrap">
+                  <p>所属教材章节: &nbsp;&nbsp;{{randomWords[3].chapter}}</p>
+              </ion-item>
+
+            </ion-list>
+          </ion-slide>
+
+
+        </ion-slide-box>
+        </ion-content>
+     </ion-view>
+   </script>
+
+   <script id="test_modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar-header bar-positive">
+        <h1 class="title">Test Result</h1>
+        <button class="button button-icon ion-close-round" ng-click="closeModal()"></button>
+      </ion-header-bar>
+      <ion-content class="padding">
+        <ion-list class="card">
+          <ion-item><strong ng-class="{'BINGO':'balanced', 'WRONG':'assertive'}[state]">{{state}}</strong></ion-item>
+          <ion-item class="item item-text-wrap item-button-right">
+              <h2>{{activeWord.kanji}}  &nbsp;&nbsp; <span class="item-note">{{activeWord.kana}}</span></h2> 
+              <button class="button button-light" ng-click="audioPlay(activeWord)"><i class="icon ion-volume-medium"></i></button>
+          </ion-item>
+          <ion-item class="item item-text-wrap">
+              <p>翻译: &nbsp;&nbsp;{{activeWord.trans}}</p>
+          </ion-item>
+          <ion-item class="item item-text-wrap">
+              <p>词类: &nbsp;&nbsp;{{activeWord.wtype}}</p>
+          </ion-item>
+          <ion-item class="item item-text-wrap">
+              <p>重音: &nbsp;&nbsp;{{activeWord.accent}}</p>
+          </ion-item>
+          <ion-item class="item item-text-wrap">
+              <p>所属教材章节: &nbsp;&nbsp;{{activeWord.chapter}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-content>      
+    </ion-modal-view>
+   </script>   
   </body>
 </html>

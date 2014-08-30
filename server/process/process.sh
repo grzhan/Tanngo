@@ -1,0 +1,10 @@
+#!/bin/bash
+cd process
+rm -f origin.wav
+ffmpeg -i src.amr -ar 16000 origin.wav
+julius -C custom.jconf > results.out
+cat results.out | grep phseq1 > rome.out
+cat results.out | grep cmscore1 > score.out
+
+cat rome.out
+cat score.out
